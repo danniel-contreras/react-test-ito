@@ -1,10 +1,10 @@
 import { useAppSelector } from "./hooks/useRedux";
 import { Auth } from "./pages/Auth";
-import { Home } from "./pages/Home";
+import { Router } from "./routes/Router";
 
 function App() {
   const auth = useAppSelector((state) => state.auth.auth);
-  return <>{auth.isLoggedIn ? <Home /> : <Auth />}</>;
+  return <>{auth.isLoggedIn ? <Router /> : <Auth />}</>;
 }
 
 export default App;
