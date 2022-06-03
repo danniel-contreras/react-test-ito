@@ -3,13 +3,21 @@ import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { loginSchema } from "../../validations/yup.validation";
+import { LoginMethod } from "../../api/login.api";
+import { useAppDispatch } from "../../hooks/useRedux";
+import { setLogin } from "../../redux/actions/auth.action";
+import { SetToken } from "../../api/token";
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log(values);
+      LoginMethod(values).then(({ data }) => {
+        SetToken(data.token);
+        dispatch(setLogin(data));
+      });
     },
   });
   return (
@@ -47,7 +55,7 @@ export const Login = () => {
           </span>
         )}
       </div>
-      <div>
+      <div className="mt-2">
         <label className="text-xs font-semibold text-gray-500">Password</label>
         <div className="relative max-w-full text-gray-600 focus-within:text-gray-400">
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
