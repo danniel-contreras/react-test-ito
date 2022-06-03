@@ -8,16 +8,22 @@ import { useAppDispatch } from "../../hooks/useRedux";
 import { setLogin } from "../../redux/actions/auth.action";
 import { SetToken } from "../../api/token";
 
-export const Login = () => {
+export const Login = ({ setLoginLoading }) => {
   const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      LoginMethod(values).then(({ data }) => {
-        SetToken(data.token);
-        dispatch(setLogin(data));
-      });
+      setLoginLoading(true);
+      LoginMethod(values)
+        .then(({ data }) => {
+          SetToken(data.token);
+          dispatch(setLogin(data));
+          setLoginLoading(false);
+        })
+        .catch(() => {
+          setLoginLoading(false);
+        });
     },
   });
   return (
