@@ -1,7 +1,78 @@
-import React from 'react'
+import { Result } from "postcss";
+import { useEffect, useState } from "react";
+import { Layout } from "../components/Layout";
+import { MovieInfo } from "../components/Movies/MovieInfo";
+import Pagination from "../components/Pagination";
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { MoviesState } from "../interfaces/redux.interface";
+import { searchMovies, setMovies } from "../redux/actions/movies.action";
+import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const Home = () => {
+  const dispatch = useAppDispatch();
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState<string>();
+  const [pagination, setPagination] = useState();
+
+  const getAll = (page: number) => {
+    dispatch(setMovies(page));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const searchMovie = (page: number, query: string | undefined) => {
+    if (query !== "" && typeof query !== "undefined") {
+      dispatch(searchMovies(page, query));
+      return;
+    }
+    dispatch(setMovies(page));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const movies: MoviesState = useAppSelector((state) => state.movies.movies);
+  useEffect(() => {
+    return searchMovie(page, query);
+  }, [page, query]);
+
   return (
-    <div>Home</div>
-  )
-}
+    <Layout>
+      <div className="text-lg text-gray-500 font-semibold my-4">
+        Most Popular Movies
+      </div>
+      <div className="flex my-8">
+        <label htmlFor="" className="font-bold text-gray-500 text-xs mt-2">
+          Search
+        </label>
+        <div className="relative ml-2 w-full max-w-full text-gray-600 focus-within:text-gray-400">
+          <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+            <button
+              type="button"
+              className="p-1 focus:outline-none focus:shadow-outline"
+            >
+              <Icon icon={faSearch} />
+            </button>
+          </span>
+          <input
+            autoComplete="NONE"
+            onChange={(e) => setQuery(e.currentTarget.value)}
+            type="search"
+            name="search"
+            placeholder="Type to search a movie..."
+            className="pl-10 border w-full py-1 rounded"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl2:grid-cols-3 gap-8">
+        {movies.results.map((mov, index) => (
+          <MovieInfo key={index} mov={mov} />
+        ))}
+      </div>
+      <Pagination
+        pageSize={movies.results.length}
+        currentPage={movies.page}
+        last={movies.total_pages >= 500 ? 500 : movies.total_pages}
+        onPageChange={setPage}
+        totalCount={movies.total_pages >= 500 ? 500 * 20  : movies.total_results}
+        siblingCount={4}
+      />
+    </Layout>
+  );
+};
