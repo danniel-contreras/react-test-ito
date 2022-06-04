@@ -56,8 +56,8 @@ const Pagination = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col items-start my-6 px-5">
-      <ul className="flex text-gray-700">
+    <div className="flex flex-col  items-start my-6 px-5">
+      <ul className="flex text-gray-700 w-96">
         <div className="h-8 w-8 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
           <button
             className="hover:border-0"

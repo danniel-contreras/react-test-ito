@@ -13,3 +13,7 @@ export const GetSearchMovies = (page: number, query: string) => {
       `search/movie?api_key=${API_KEY}&page=${page}&query=${query}`
   );
 };
+
+export const GetDetailMovie = (id: number) => {
+  return axios.get(MOVIEDB_API_URL + `movie/${id}?api_key=${API_KEY}`);
+};

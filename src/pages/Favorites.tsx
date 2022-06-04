@@ -2,7 +2,7 @@ import { Result } from "postcss";
 import { useEffect, useState } from "react";
 import { getItems } from "../api/favotires.movies";
 import { Layout } from "../components/Layout";
-import { MovieInfo } from "../components/Movies/MovieInfo";
+import MovieInfo from "../components/Movies/MovieInfo";
 import Lottie from "lottie-react";
 import searchEmpty from "../assets/lottie/search-not-found.json";
 

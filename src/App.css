@@ -41,8 +41,7 @@ button {
   font-size: calc(10px + 2vmin);
 }
 
-
-.animate:hover > .show{
+.animate:hover > .show {
   animation: fade-in 1.5s;
   display: block !important;
 }
@@ -53,5 +52,50 @@ button {
   }
   to {
     opacity: 1;
+  }
+}
+
+.responsive__icon {
+  margin-left: 100%;
+}
+.responsive__icon {
+  margin-top: 0;
+}
+
+.responsive__image{
+
+}
+@media screen and (max-width: 450px) {
+  .responsive__icon {
+    margin-left: 0;
+  }
+  .responsive__title {
+    margin-top: 60%;
+  }
+}
+
+
+
+@media screen and (max-width: 640px) {
+  .responsive__icon {
+    margin-left: 0;
+  }
+  .responsive__title {
+    margin-top: 30%;
+  }
+  .responsive__image{
+    width: 130px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .responsive__icon {
+    margin-left: 0;
+  }
+  .responsive__title {
+    margin-top: 50%;
+  }
+  .responsive__image{
+    width: 100px !important;
   }
 }

@@ -1,13 +1,16 @@
 import { Result } from "postcss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Layout } from "../components/Layout";
-import { MovieInfo } from "../components/Movies/MovieInfo";
-import Pagination from "../components/Pagination";
+
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import { MoviesState } from "../interfaces/redux.interface";
 import { searchMovies, setMovies } from "../redux/actions/movies.action";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Loading } from "../components/Loading";
+//Lazy components
+const MovieInfo = lazy(() => import("../components/Movies/MovieInfo"));
+const Pagination = lazy(() => import("../components/Pagination"));
 
 export const Home = () => {
   const dispatch = useAppDispatch();
@@ -15,10 +18,6 @@ export const Home = () => {
   const [query, setQuery] = useState<string>();
   const [pagination, setPagination] = useState();
 
-  const getAll = (page: number) => {
-    dispatch(setMovies(page));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
   const searchMovie = (page: number, query: string | undefined) => {
     if (query !== "" && typeof query !== "undefined") {
       dispatch(searchMovies(page, query));
@@ -60,19 +59,23 @@ export const Home = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl2:grid-cols-3 gap-8">
-        {movies.results.map((mov, index) => (
-          <MovieInfo key={index} mov={mov} />
-        ))}
-      </div>
-      <Pagination
-        pageSize={movies.results.length}
-        currentPage={movies.page}
-        last={movies.total_pages >= 500 ? 500 : movies.total_pages}
-        onPageChange={setPage}
-        totalCount={movies.total_pages >= 500 ? 500 * 20  : movies.total_results}
-        siblingCount={4}
-      />
+      <Suspense fallback={<Loading />}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl2:grid-cols-3 gap-8">
+          {movies.results.map((mov, index) => (
+            <MovieInfo key={index} mov={mov} />
+          ))}
+        </div>
+        <Pagination
+          pageSize={movies.results.length}
+          currentPage={movies.page}
+          last={movies.total_pages >= 500 ? 500 : movies.total_pages}
+          onPageChange={setPage}
+          totalCount={
+            movies.total_pages >= 500 ? 500 * 20 : movies.total_results
+          }
+          siblingCount={4}
+        />
+      </Suspense>
     </Layout>
   );
 };

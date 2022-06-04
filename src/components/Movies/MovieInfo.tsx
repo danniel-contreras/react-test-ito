@@ -18,19 +18,19 @@ interface Props {
   setReload?: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const MovieInfo = ({ mov, setReload }: Props) => {
+function MovieInfo({ mov, setReload }: Props) {
   const [isFav, setIsFav] = useState(false);
   const [isReadMore, setIsReadMore] = useState(true);
   const removeFromFav = (mov: Result) => {
     removeMovie(mov);
     if (typeof setReload !== "undefined") {
-        console.log("hola")
+      console.log("hola");
       setReload(true);
     }
   };
 
   return (
-    <div className=" min-h-96 h-96 grid rounded grid-cols-2 w-full border-2 cursor-pointer mb-5">
+    <div className="min-h-96 h-96 grid rounded grid-cols-1 sm:grid-cols-2  w-full border-2 cursor-pointer mb-5">
       <div style={{ maxWidth: "50%" }} className="min-h-96 h-96 absolute">
         <div className="absolute z-10 self-end justify-self-start -bottom-2 -left-2">
           <ProgressBody>
@@ -49,9 +49,7 @@ export const MovieInfo = ({ mov, setReload }: Props) => {
           </ProgressBody>
         </div>
         <LazyLoadImage
-          className="h-full w-full md:w-auto"
-          width={"250px"}
-          height={"100%"}
+          className="responsive__image h-full w-28 sm:w-64 ml-20 sm:ml-0"
           src={IMG_URL + mov.poster_path}
           alt=""
           effect="blur"
@@ -59,8 +57,7 @@ export const MovieInfo = ({ mov, setReload }: Props) => {
       </div>
 
       <div
-        style={{ marginLeft: "100%" }}
-        className="flex flex-col p-3 h-auto px-8 items-center w-full"
+        className="responsive__icon flex flex-col p-3 h-auto px-8 items-center w-full"
       >
         <span
           onClick={() => setIsFav(!isFav)}
@@ -80,20 +77,25 @@ export const MovieInfo = ({ mov, setReload }: Props) => {
             />
           )}
         </span>
-        <span className="text-ellipsis h-10 overflow-hidden text-center text-sm font-bold text-gray-500">
+        <span className="responsive__title text-ellipsis h-10 overflow-hidden text-center text-sm font-bold text-gray-500">
           {mov.original_title}
         </span>
-        <span className="text-center text-xs font-bold text-gray-500 mt-2">
+        <span className="text-center text-xs font-bold text-gray-500 mt-0 md:mt-2">
           {mov.release_date}
         </span>
-        <p className=" text-ellipsis h-52 whitespace-no-wrap overflow-hidden text-xs text-justify font-semibold text-gray-500 mt-2">
+        <p className="hidden md:block text-ellipsis h-52 whitespace-no-wrap overflow-hidden text-xs text-justify font-semibold text-gray-500 mt-2">
           {isReadMore ? mov.overview.slice(0, 350) : mov.overview}
           <span className="text-blue-500">{isReadMore && "..."}</span>
         </p>
+        <p className="block md:hidden text-ellipsis h-52 whitespace-no-wrap overflow-hidden text-xs text-justify font-semibold text-gray-500 mt-2">
+          {isReadMore ? mov.overview.slice(0, 225) : mov.overview}
+          <span className="text-blue-500">{isReadMore && "..."}</span>
+        </p>
       </div>
+     
     </div>
   );
-};
+}
 
 interface PropsE {
   children: React.ReactNode;
@@ -102,8 +104,10 @@ function ProgressBody(props: PropsE) {
   return (
     <div>
       <div className="flex">
-        <div style={{ width: "30%", paddingRight: 30 }}>{props.children}</div>
+        <div className="w-16" style={{paddingRight: 30 }}>{props.children}</div>
       </div>
     </div>
   );
 }
+
+export default MovieInfo;
