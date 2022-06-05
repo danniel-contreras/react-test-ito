@@ -14,3 +14,8 @@ Vite is a build tool that aims to provide a faster and leaner development experi
 Vite is opinionated and comes with sensible defaults out of the box, but is also highly extensible via its [Plugin API](https://vitejs.dev/guide/api-plugin.html) and [JavaScript API](https://vitejs.dev/guide/api-javascript.html) with full typing support.
 
 You can learn more about the rationale behind the project in the [Why Vite](https://vitejs.dev/guide/why.html) section.
+
+## About React
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="200"></p>
+
+React is a Javascript library for creating user interfaces. Learn all about React on our [home page](https://es.reactjs.org/) or in [this tutorial](https://es.reactjs.org/tutorial/tutorial.html) .
