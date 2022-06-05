@@ -1,5 +1,11 @@
 # react-test-ito
 A test for the full stack developer position
+
+API USING
+[TheMovieDB](https://www.themoviedb.org)
+
+[REQRES](https://reqres.in/)
+
 # React aplication created by Vite
 <p align="center"><img src="https://vitejs.dev/logo.svg" width="200"></p>
 
