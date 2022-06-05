@@ -1,14 +1,18 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { loginSchema } from "../../validations/yup.validation";
 import { LoginMethod } from "../../api/login.api";
 import { useAppDispatch } from "../../hooks/useRedux";
-import { setLogin } from "../../redux/actions/auth.action";
+import { setLogin } from "../../redux/authSlice";
 import { SetToken } from "../../api/token";
 
-export const Login = ({ setLoginLoading }) => {
+interface Props {
+  setLoginLoading: React.Dispatch<SetStateAction<boolean>>;
+}
+
+export const Login = ({ setLoginLoading }: Props) => {
   const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -17,8 +21,9 @@ export const Login = ({ setLoginLoading }) => {
       setLoginLoading(true);
       LoginMethod(values)
         .then(({ data }) => {
+          const nData = { ...data, isLoggedIn: true };
           SetToken(data.token);
-          dispatch(setLogin(data));
+          dispatch(setLogin(nData));
           setLoginLoading(false);
         })
         .catch(() => {
