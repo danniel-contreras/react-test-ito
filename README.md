@@ -67,3 +67,19 @@ or
 ```
 $ npm run dev
 ```
+-For preview deploy run 
+```
+$ yarn preview
+```
+or
+```
+$ npm run preview
+```
+-For deploy run 
+```
+$ yarn build
+```
+or
+```
+$ npm run build
+```
