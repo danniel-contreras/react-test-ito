@@ -1,7 +1,7 @@
 # react-test-ito
 A test for the full stack developer position
 
-API USING
+## API USING
 [TheMovieDB](https://www.themoviedb.org)
 
 [REQRES](https://reqres.in/)
