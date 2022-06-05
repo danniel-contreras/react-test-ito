@@ -38,4 +38,32 @@ Learn Tailwind CSS [here](https://tailwindcss.com/)
 <p align="center"><img src="https://classic.yarnpkg.com/assets/og_image.png" width="200"></p>
 
 The Yarn team stands with the people of Ukraine during this heinous assault on their freedom, their independence, and their lives.
+
 Learn Tailwind YARN [here](https://yarnpkg.com/)
+
+## Instalation 
+
+-Firt Step: clone from GitHub
+```
+$ git clone https://github.com/danniel-contreras/react-test-ito
+```
+-Next using the command line(GitBash or CMD) and enter the project folder
+```
+$ cd react-test-ito
+```
+-Now is time to install the project dependencies 
+```
+$ yarn
+```
+or
+```
+$ npm install
+```
+-And finally execute the server
+```
+$ yarn dev
+```
+or
+```
+$ npm run dev
+```
