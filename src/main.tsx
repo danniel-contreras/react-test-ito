@@ -6,6 +6,7 @@ import App from './App'
 import './index.css'
 import 'react-circular-progressbar/dist/styles.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -57,7 +57,7 @@ const Pagination = (props: Props) => {
 
   return (
     <div className="flex flex-col  items-start my-6 px-5">
-      <ul className="flex text-gray-700 w-96">
+      <ul className="hidden md:flex text-gray-700 w-96">
         <div className="h-8 w-8 mr-1 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
           <button
             className="hover:border-0"
@@ -81,7 +81,7 @@ const Pagination = (props: Props) => {
           </button>
         </div>
         <div className="flex h-8 font-medium rounded-full px-6 bg-gray-200">
-          {paginationRange?.map((pageNumber,index) => (
+          {paginationRange?.map((pageNumber, index) => (
             <li
               key={index}
               className={
@@ -117,6 +117,22 @@ const Pagination = (props: Props) => {
           </button>
         </div>
       </ul>
+      <div className="flex md:hidden">
+        <button
+          disabled={pagination.currentPage === 1}
+          onClick={onPrevious}
+          className="bg-blue-400 text-white font-semibold text-sm rounded py-2 px-8"
+        >
+          Prev
+        </button>
+        <button
+          disabled={pagination.currentPage === last}
+          onClick={onNext}
+          className="bg-blue-400 text-white font-semibold text-sm rounded py-2 ml-6 px-8"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

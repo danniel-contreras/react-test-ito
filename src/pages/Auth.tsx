@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Logo from "../assets/site-logo.png";
 import { Login } from "../components/Auth/Login";
 import Lottie from "lottie-react";
@@ -6,6 +6,11 @@ import dotsLoading from "../assets/lottie/loading-spinner.json";
 
 export const Auth = () => {
   const [loginloading, setLoginloading] = useState<boolean>(false);
+  useEffect(() => {
+    return () => {
+      document.title = "Auth"
+    };
+  }, [])
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       {loginloading ? (

@@ -12,6 +12,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@headlessui/react": "^1.6.4",
     "@reduxjs/toolkit": "^1.8.2",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "@types/react-show-more-text": "^1.4.2",

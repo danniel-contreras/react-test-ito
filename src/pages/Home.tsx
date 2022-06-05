@@ -1,37 +1,53 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Layout } from "../components/Layout";
-
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import { MoviesState } from "../interfaces/redux.interface";
 import { searchMovies, setMovies } from "../redux/actions/movies.action";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
 import Lottie from "lottie-react";
 import NoResult from "../assets/lottie/search-not-found.json";
 import { Loading } from "../components/Loading";
+
 //Lazy components
 const MovieInfo = lazy(() => import("../components/Movies/MovieInfo"));
 const Pagination = lazy(() => import("../components/Pagination"));
 
 export const Home = () => {
+  //dispatch react redux
   const dispatch = useAppDispatch();
+
+  //react use states
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState<string>();
 
+  //funtion to search a movie with the title or get all popular movies
   const searchMovie = (page: number, query: string | undefined) => {
+    //if search option
     if (query !== "" && typeof query !== "undefined") {
       dispatch<any>(searchMovies(page, query));
       return;
     }
+    //if get all option
     dispatch<any>(setMovies(page));
+    //up to top on change page 
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  //react redux state selector
   const movies: MoviesState = useAppSelector((state) => state.movies.movies);
+
+  //react effect to search a movie or get all
   useEffect(() => {
     return searchMovie(page, query);
   }, [page, query]);
 
+  // react effect to change title
+  useEffect(() => {
+    return () => {
+      document.title = "Home";
+    };
+  }, []);
   return (
     <Layout>
       <div className="text-lg text-gray-500 font-semibold my-4">
