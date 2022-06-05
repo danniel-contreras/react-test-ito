@@ -12,6 +12,7 @@ import {
   isFavorite,
   removeMovie,
 } from "../../api/favotires.movies";
+import {Link} from "react-router-dom"
 
 interface Props {
   mov: Result;
@@ -30,6 +31,7 @@ function MovieInfo({ mov, setReload }: Props) {
   };
 
   return (
+    <Link to={`/movie/`+mov.id}>
     <div className="min-h-96 h-96 grid rounded grid-cols-1 sm:grid-cols-2  w-full border-2 cursor-pointer mb-5">
       <div style={{ maxWidth: "50%" }} className="min-h-96 h-96 absolute">
         <div className="absolute z-10 self-end justify-self-start -bottom-2 -left-2">
@@ -94,6 +96,7 @@ function MovieInfo({ mov, setReload }: Props) {
       </div>
      
     </div>
+    </Link>
   );
 }
 

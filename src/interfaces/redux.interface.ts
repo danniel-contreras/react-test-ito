@@ -20,6 +20,9 @@ export interface Result {
   adult: boolean;
   backdrop_path: string;
   genre_ids: Array<number>;
+  genres:Array<{id:number,name:string}>,
+  production_countries:Array<{name:string}>,
+  production_companies:Array<{logo_path:string,name:string}>,
   id: number;
   original_language: string;
   original_title: string;
