@@ -7,12 +7,13 @@ import Lottie from "lottie-react";
 import searchEmpty from "../assets/lottie/search-not-found.json";
 
 export const Favorites = () => {
-  const [favorites, setFavorites] = useState<Result[]>();
+  const [favorites, setFavorites] = useState<[]>();
   const [reload, setReload] = useState(false);
   useEffect(() => {
     setReload(false);
     return setFavorites(getItems());
   }, [reload]);
+  console.log(favorites)
   return (
     <Layout>
       <div className="text-lg text-gray-500 font-semibold my-4">

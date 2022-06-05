@@ -31,7 +31,7 @@ function MovieInfo({ mov, setReload }: Props) {
   };
 
   return (
-    <Link to={`/movie/`+mov.id}>
+    
     <div className="min-h-96 h-96 grid rounded grid-cols-1 sm:grid-cols-2  w-full border-2 cursor-pointer mb-5">
       <div style={{ maxWidth: "50%" }} className="min-h-96 h-96 absolute">
         <div className="absolute z-10 self-end justify-self-start -bottom-2 -left-2">
@@ -50,12 +50,14 @@ function MovieInfo({ mov, setReload }: Props) {
             ></CircularProgressbar>
           </ProgressBody>
         </div>
+        <Link to={`/movie/`+mov.id}>
         <LazyLoadImage
-          className="responsive__image h-full w-28 sm:w-64 ml-20 sm:ml-0"
+          className="responsive__image cursor-pointer h-full w-28 sm:w-64 ml-20 sm:ml-0"
           src={IMG_URL + mov.poster_path}
           alt=""
           effect="blur"
         />
+        </Link>
       </div>
 
       <div
@@ -96,7 +98,7 @@ function MovieInfo({ mov, setReload }: Props) {
       </div>
      
     </div>
-    </Link>
+    
   );
 }
 

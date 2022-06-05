@@ -20,10 +20,10 @@ export const Home = () => {
 
   const searchMovie = (page: number, query: string | undefined) => {
     if (query !== "" && typeof query !== "undefined") {
-      dispatch(searchMovies(page, query));
+      dispatch<any>(searchMovies(page, query));
       return;
     }
-    dispatch(setMovies(page));
+    dispatch<any>(setMovies(page));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const movies: MoviesState = useAppSelector((state) => state.movies.movies);
