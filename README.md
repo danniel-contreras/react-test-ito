@@ -26,3 +26,16 @@ React is a Javascript library for creating user interfaces. Learn all about Reac
 TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 
 Learning Typescript [here](https://www.typescriptlang.org/)
+
+## About Tailwind CSS
+<p align="center"><img src="https://tailwindcss.com/_next/static/media/social-square.b622e290e82093c36cca57092ffe494f.jpg" width="200"></p>
+
+A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.
+
+Learn Tailwind CSS [here](https://tailwindcss.com/)
+
+## About Yarn
+<p align="center"><img src="https://classic.yarnpkg.com/assets/og_image.png" width="200"></p>
+
+The Yarn team stands with the people of Ukraine during this heinous assault on their freedom, their independence, and their lives.
+Learn Tailwind YARN [here](https://yarnpkg.com/)
