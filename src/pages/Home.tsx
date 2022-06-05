@@ -1,4 +1,3 @@
-import { Result } from "postcss";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Layout } from "../components/Layout";
 
@@ -7,6 +6,9 @@ import { MoviesState } from "../interfaces/redux.interface";
 import { searchMovies, setMovies } from "../redux/actions/movies.action";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
+import Lottie from "lottie-react";
+import NoResult from "../assets/lottie/search-not-found.json";
 import { Loading } from "../components/Loading";
 //Lazy components
 const MovieInfo = lazy(() => import("../components/Movies/MovieInfo"));
@@ -16,7 +18,6 @@ export const Home = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState<string>();
-  const [pagination, setPagination] = useState();
 
   const searchMovie = (page: number, query: string | undefined) => {
     if (query !== "" && typeof query !== "undefined") {
@@ -60,7 +61,7 @@ export const Home = () => {
         </div>
       </div>
       <Suspense fallback={<Loading />}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl2:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
           {movies.results.map((mov, index) => (
             <MovieInfo key={index} mov={mov} />
           ))}
@@ -75,6 +76,11 @@ export const Home = () => {
           }
           siblingCount={4}
         />
+        {movies && movies.results.length <= 0 && (
+          <div className="w-80 ml-20 md:ml-44 mt-20">
+            <Lottie autoplay={true} loop={true} animationData={NoResult} />
+          </div>
+        )}
       </Suspense>
     </Layout>
   );

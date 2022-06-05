@@ -12,7 +12,7 @@ import {
   isFavorite,
   removeMovie,
 } from "../../api/favotires.movies";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface Props {
   mov: Result;
@@ -31,10 +31,9 @@ function MovieInfo({ mov, setReload }: Props) {
   };
 
   return (
-    
-    <div className="min-h-96 h-96 grid rounded grid-cols-1 sm:grid-cols-2  w-full border-2 cursor-pointer mb-5">
+    <div className="min-h-96 h-auto grid rounded grid-cols-1 sm:grid-cols-2  w-full border-2 cursor-pointer mb-5">
       <div style={{ maxWidth: "50%" }} className="min-h-96 h-96 absolute">
-        <div className="absolute z-10 self-end justify-self-start -bottom-2 -left-2">
+        <div className="absolute z-10 self-end justify-self-start -top-2 -left-2">
           <ProgressBody>
             <CircularProgressbar
               value={mov.vote_average * 10}
@@ -50,19 +49,17 @@ function MovieInfo({ mov, setReload }: Props) {
             ></CircularProgressbar>
           </ProgressBody>
         </div>
-        <Link to={`/movie/`+mov.id}>
-        <LazyLoadImage
-          className="responsive__image cursor-pointer h-full w-28 sm:w-64 ml-20 sm:ml-0"
-          src={IMG_URL + mov.poster_path}
-          alt=""
-          effect="blur"
-        />
+        <Link to={`/movie/` + mov.id}>
+          <LazyLoadImage
+            className="responsive__image cursor-pointer h-full w-28 sm:w-56 ml-20 sm:ml-0"
+            src={IMG_URL + mov.poster_path}
+            alt=""
+            effect="blur"
+          />
         </Link>
       </div>
 
-      <div
-        className="responsive__icon flex flex-col p-3 h-auto px-8 items-center w-full"
-      >
+      <div className="responsive__icon flex flex-col p-3 h-auto px-8 items-center w-full">
         <span
           onClick={() => setIsFav(!isFav)}
           className="float-right -mr-4 text-xl self-end"
@@ -88,7 +85,7 @@ function MovieInfo({ mov, setReload }: Props) {
           {mov.release_date}
         </span>
         <p className="hidden md:block text-ellipsis h-52 whitespace-no-wrap overflow-hidden text-xs text-justify font-semibold text-gray-500 mt-2">
-          {isReadMore ? mov.overview.slice(0, 350) : mov.overview}
+          {isReadMore ? mov.overview.slice(0, 300) : mov.overview}
           <span className="text-blue-500">{isReadMore && "..."}</span>
         </p>
         <p className="block md:hidden text-ellipsis h-52 whitespace-no-wrap overflow-hidden text-xs text-justify font-semibold text-gray-500 mt-2">
@@ -96,9 +93,7 @@ function MovieInfo({ mov, setReload }: Props) {
           <span className="text-blue-500">{isReadMore && "..."}</span>
         </p>
       </div>
-     
     </div>
-    
   );
 }
 
@@ -109,7 +104,9 @@ function ProgressBody(props: PropsE) {
   return (
     <div>
       <div className="flex">
-        <div className="w-16" style={{paddingRight: 30 }}>{props.children}</div>
+        <div className="w-16" style={{ paddingRight: 30 }}>
+          {props.children}
+        </div>
       </div>
     </div>
   );

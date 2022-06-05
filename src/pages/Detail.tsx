@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { useParams } from "react-router-dom";
 import { GetDetailMovie } from "../api/movies.api";
 import { Layout } from "../components/Layout";
 import { Result } from "../interfaces/redux.interface";
 import { IMG_URL } from "../utils/constants";
+import { reColor } from "../utils/proggress-color";
+
+import Lottie from "lottie-react";
+import Loading from "../assets/lottie/double-loader.json";
 
 export const Detail = () => {
   const { id } = useParams();
@@ -12,7 +17,7 @@ export const Detail = () => {
   const getDet = (id: string | undefined) => {
     GetDetailMovie(Number(id)).then(({ data }) => {
       setMovie(data);
-      document.title = data.original_title
+      document.title = data.original_title;
     });
   };
 
@@ -21,6 +26,7 @@ export const Detail = () => {
   }, [id]);
   return (
     <Layout>
+      <Suspense fallback={<Lottie autoplay={true} loop={true} animationData={Loading} />}>
       <div>
         <div
           style={{
@@ -43,12 +49,13 @@ export const Detail = () => {
           <p className=" text-2xl  text-gray-500 font-semibold">
             {movie?.original_title}
           </p>
+          <p>({movie?.release_date})</p>
           <ul className="flex mt-4">
             {movie?.genres &&
               movie.genres.map((gen, index: number) => (
                 <li
                   className={
-                    "bg-gray-600 mx-4 px-6 py-2 font-semibold whitespace-nowrap text-white " +
+                    "bg-gray-600 mx-4 px-6 py-2 text-xs md:text-base font-semibold whitespace-nowrap text-white " +
                     (Number(index) === 0 ? "mx-0 mr-4" : "mx-4")
                   }
                   key={index}
@@ -64,6 +71,7 @@ export const Detail = () => {
           <p className="text-lg font-semibold text-gray-500 mt-8">
             Populararity: {movie?.popularity}
           </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           <p className="text-lg font-semibold text-gray-500 mt-8">
             Production Countries:
             <ul className="mt-2">
@@ -80,14 +88,41 @@ export const Detail = () => {
             <ul className="mt-2">
               {movie?.production_companies &&
                 movie.production_companies.map((company, index) => (
-                  <li key={index}>
-                    <img className="w-24" src={IMG_URL + company.logo_path} alt="" />
+                  <li className="flex" key={index}>
+                    <img
+                      className="w-16"
+                      src={IMG_URL + company.logo_path}
+                      alt=""
+                    />
                   </li>
                 ))}
             </ul>
           </p>
+          </div>
+          <p className="text-gray-500 font-semibold text-lg flex flex-col">
+            Average:
+            <div className="w-16 mt-4">
+            {typeof movie !== "undefined" && (
+              <CircularProgressbar
+                value={movie?.vote_average && movie.vote_average * 10}
+                text={`${movie?.vote_average * 10}%`}
+                background
+                backgroundPadding={6}
+                styles={buildStyles({
+                  backgroundColor: "#223D50",
+                  textColor: "#fff",
+                  pathColor: reColor(movie?.vote_average * 10),
+                  trailColor: "transparent",
+                })}
+              ></CircularProgressbar>
+            )}
+            </div>
+            <p className="text-xs mt-2">Total votes: {movie?.vote_count}</p>
+          </p>
         </div>
+        
       </div>
+      </Suspense>
     </Layout>
   );
 };
