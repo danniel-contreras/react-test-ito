@@ -45,7 +45,7 @@ Learn Tailwind CSS [here](https://tailwindcss.com/)
 
 The Yarn team stands with the people of Ukraine during this heinous assault on their freedom, their independence, and their lives.
 
-Learn Tailwind YARN [here](https://yarnpkg.com/)
+Learn YARN [here](https://yarnpkg.com/)
 
 ## Instalation 
 
